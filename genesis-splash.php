@@ -72,7 +72,7 @@ add_action( 'genesis_before', 'gsplash_do_splash', 1 );
  * Do splash content
  */
 function gsplash_do_splash() {
-    printf( '<div class="genesis-splash">BOB: %s</div>', genesis_get_option( 'splash_content', 'gsplash-settings' ) );
+    printf( '<div class="genesis-splash">%s</div>', genesis_get_option( 'splash_content', 'gsplash-settings' ) );
 }
 
 add_action( 'init', 'gsplash_register_scripts' );
