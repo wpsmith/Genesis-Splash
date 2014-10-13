@@ -4,7 +4,7 @@
  * Plugin Name: Genesis Splash
  * Plugin URI: http://wordpress.org/extend/plugins/genesis-splash
  * Description: Enables Captivate submissions within WordPress.
- * Version: 1.0.0
+ * Version: 1.0.2
  * Author: Ernie Falconer & Travis Smith
  * Author URI: http://www.wpsmith.net/
  * Text Domain: genesis-splash
@@ -14,7 +14,7 @@
     Copyright 2014    Ernie Falconer    (email : http://disrupt2create.com)
 
     This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License, version 2, as 
+    it under the terms of the GNU General Public License, version 2, as
     published by the Free Software Foundation.
 
     This program is distributed in the hope that it will be useful,
@@ -42,9 +42,9 @@
  *      Add translation/localization call
  *      Add languages folder
  *      Add auto-dismiss option & JS timer
- */ 
+ */
 
-define( 'GSPLASH_VERSION', '1.0.0' );
+define( 'GSPLASH_VERSION', '1.0.2' );
 
 // Add admin page if we are in the admin
 add_action( 'genesis_admin_menu', 'gsplash_add_child_theme_settings' );
@@ -54,17 +54,17 @@ add_action( 'genesis_admin_menu', 'gsplash_add_child_theme_settings' );
  * @since 1.0.0
  */
 function gsplash_add_child_theme_settings() {
-    
+
     if ( !is_admin() ) {
         return;
     }
-    
-    require_once( 'lib/splash-settings.php' );
+
+    require_once 'lib/splash-settings.php';
 
     global $_gsplash_settings;
-    
+
     // Instantiate class, automatically executes the stuff in the __construct() method.
-    $_gsplash_settings = new GSplash_Settings;      
+    $_gsplash_settings = new GSplash_Settings;
 }
 
 add_action( 'genesis_before', 'gsplash_do_splash', 1 );
@@ -102,8 +102,8 @@ function gsplash_enqueue_scripts() {
 add_action( 'body_class', 'gsplash_body_class' );
 /**
  * Hide the body ASAP.
- * 
- * @param $classes array Array of body classes.
+ *
+ * @param unknown $classes array Array of body classes.
  * @return $classes array Modified array of body classes.
  */
 function gsplash_body_class( $classes ) {
