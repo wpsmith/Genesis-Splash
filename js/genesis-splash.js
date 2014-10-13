@@ -17,12 +17,14 @@ jQuery(document).ready(function ($) {
     $('.genesis-splash-dismiss').css({position: 'absolute', top: '10px', right: '10px'});
 
     // Add click listener
-    $('.genesis-splash').on('click', function () {
+    $(document).on('click', function () {
 
         // Hide the splash page
-        $('.genesis-splash').fade('slow');
+        $('.genesis-splash-hidden').removeClass('genesis-splash-hidden');
+        $('.genesis-splash').fadeOut('slow').remove();
 
         // Show the body
-        $('body').show('slow');
+        $('body .site-container').fadeIn('slow');
+
     });
 });
