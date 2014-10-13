@@ -96,8 +96,7 @@ class GSplash_Settings extends Genesis_Admin_Boxes {
      * @see GSplash_Settings::metaboxes()
      */
     function splash_mb() {
-        
-        wp_editor( $this->get_field_value( 'splash' ), $this->get_field_name( 'splash' ) );
+        wp_editor( $this->get_field_value( 'splash_content' ), $this->get_field_name( 'splash_content' ) );
         
     }       
 }
