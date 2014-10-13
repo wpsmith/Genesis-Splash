@@ -37,13 +37,16 @@
  * @link        https://wordpress.org/extend/plugins/genesis-splash/
  * @todo
  *      Verify that Genesis is installed on activation
+ *      Add background splash color with transparency
+ *      Add background image stretch option
  *      Add translation/localization call
  *      Add languages folder
  *      Add auto-dismiss option & JS timer
  */ 
 
-// Add admin page if we are in the admin
+define( 'GSPLASH_VERSION', '1.0.0' );
 
+// Add admin page if we are in the admin
 add_action( 'genesis_admin_menu', 'gsplash_add_child_theme_settings' );
 /**
  * Instantiate the Settings Page
@@ -69,7 +72,7 @@ add_action( 'genesis_before', 'gsplash_do_splash', 1 );
  * Do splash content
  */
 function gsplash_do_splash() {
-    printf( '<div class="genesis-splash">%s</div>', genesis_get_option( $option_name, 'gsplash-settings' ) );
+    printf( '<div class="genesis-splash">%s</div>', genesis_get_option( 'splash_content', 'gsplash-settings' ) );
 }
 
 add_action( 'init', 'gsplash_register_scripts' );
@@ -82,7 +85,7 @@ function gsplash_register_scripts() {
     }
     // Determine suffix based on whether site is in debug mode or not
     $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG || defined( 'WP_DEBUG' ) && WP_DEBUG ? '.js' : '.min.js';
-    wp_register_script( 'genesis-splash', plugins_url( 'js/genesis-splash' . $suffix, __FILE__ ), array( 'jquery', ), '1.0.0', false );
+    wp_register_script( 'genesis-splash', plugins_url( 'js/genesis-splash' . $suffix, __FILE__ ), array( 'jquery', ), GSPLASH_VERSION, false );
 }
 
 add_action( 'wp_enqueue_scripts', 'gsplash_enqueue_scripts' );
@@ -92,17 +95,18 @@ add_action( 'wp_enqueue_scripts', 'gsplash_enqueue_scripts' );
  */
 function gsplash_enqueue_scripts() {
     wp_enqueue_script( 'genesis-splash' );
+    $handle  = defined( 'CHILD_THEME_NAME' ) && CHILD_THEME_NAME ? sanitize_title_with_dashes( CHILD_THEME_NAME ) : 'child-theme';
+    wp_add_inline_style( $handle, '.genesis-splash-hidden .site-container{display:none;}' );
 }
 
-add_action( 'body_classes', 'gsplash_body_classes' );
+add_action( 'body_class', 'gsplash_body_class' );
 /**
  * Hide the body ASAP.
  * 
  * @param $classes array Array of body classes.
  * @return $classes array Modified array of body classes.
  */
-function gsplash_body_classes( $classes ) {
+function gsplash_body_class( $classes ) {
     $classes[] = 'genesis-splash-hidden';
     return $classes;
 }
-192.30.252.158
